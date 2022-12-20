@@ -1,65 +1,60 @@
-import React, {useState, useEffect} from 'react';
-import SideBar from './SideBar';
+import React, { useState, useEffect } from "react";
+import SideBar from "./SideBar";
 import "../assets/css/login.css";
 
 function App() {
-
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
 
   const fetchProducts = () => {
-      fetch('/products/api')
-          .then(response => response.json())
-          .then(datos=> {
-              setProducts(datos.data);
-          })
-          
-  }
+    fetch("/products/api")
+      .then((response) => response.json())
+      .then((datos) => {
+        setProducts(datos.data);
+      });
+  };
 
   const fetchCategories = () => {
-    fetch('/categories')
-        .then(response => response.json())
-        .then(datos=> {
-            setCategories(datos.data);
-        })
-        
-}
+    fetch("/categories")
+      .then((response) => response.json())
+      .then((datos) => {
+        setCategories(datos.data);
+      });
+  };
 
-  
   const fetchUsers = () => {
-    fetch('/users/users')
-        .then(response => response.json())
-        .then(datos=> {
-            setUsers(datos.data);
-        })
-        
-}
+    fetch("/users/api")
+      .then((response) => response.json())
+      .then((datos) => {
+        setUsers(datos.data);
+      });
+  };
 
-  useEffect(()=> {
-      fetchProducts()
-  },[])
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  useEffect(()=> {
-    fetchCategories()
-},[])
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
-  useEffect(()=> {
-    fetchUsers()
-},[])
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
- const props = {
+  const props = {
     products: products,
     users: users,
-    categories: categories
- }
-return (
-  <React.Fragment>
-    <div id="wrapper">
-      <SideBar props = {props}/>
-    </div>
-  </React.Fragment>
-);
+    categories: categories,
+  };
+  return (
+    <React.Fragment>
+      <div id="wrapper">
+        <SideBar props={props} />
+      </div>
+    </React.Fragment>
+  );
 }
 
 export default App;
