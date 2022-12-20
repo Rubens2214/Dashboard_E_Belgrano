@@ -1,14 +1,19 @@
-import React from 'react';
-import Categories from './Categories';
+import React from "react";
+import Categories from "./Categories";
+import LastProduct from "./LastProduct";
+import LastUser from "./LastUser";
 
-function ContentRowCenter({props}){
-    return (
-        <div className="row">
-            {/*<!-- Categories in DB -->*/}
-            <Categories props= {props}/>
+function ContentRowCenter({ props }) {
+  return (
+    <div className="row">
+      {/*<!-- Categories in DB -->*/}
+      <Categories props={props} />
 
-        </div>
-    )
+      <LastProduct props={props} />
+
+      <LastUser props={props} />
+    </div>
+  );
 }
 
 export default ContentRowCenter;

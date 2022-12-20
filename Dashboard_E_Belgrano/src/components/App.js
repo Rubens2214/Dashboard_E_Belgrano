@@ -4,14 +4,24 @@ import "../assets/css/login.css";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [lastProduct, setLastProduct] = useState([]);
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
+  const [lastUser, setLastUser] = useState([]);
 
   const fetchProducts = () => {
     fetch("/products/api")
       .then((response) => response.json())
       .then((datos) => {
         setProducts(datos.data);
+      });
+  };
+
+  const fetchLastProduct = () => {
+    fetch("/products/apiLastProduct")
+      .then((response) => response.json())
+      .then((datos) => {
+        setLastProduct(datos.data);
       });
   };
 
@@ -31,8 +41,20 @@ function App() {
       });
   };
 
+  const fetchLastUser = () => {
+    fetch("/users/apiLastUser")
+      .then((response) => response.json())
+      .then((datos) => {
+        setLastUser(datos.data);
+      });
+  };
+
   useEffect(() => {
     fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    fetchLastProduct();
   }, []);
 
   useEffect(() => {
@@ -43,9 +65,15 @@ function App() {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    fetchLastUser();
+  }, []);
+
   const props = {
     products: products,
+    lastProduct: lastProduct,
     users: users,
+    lastUser: lastUser,
     categories: categories,
   };
   return (
